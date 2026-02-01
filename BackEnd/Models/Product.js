@@ -13,8 +13,9 @@ const productSchema=new mongoose.Schema({
     offerPrice :{type: Number, 
         required: true
     },
-    image: {type: Array, 
-        required: true
+    image: {
+        type: Array,
+        default: []
     },
     category: {type: String, 
         required: true
