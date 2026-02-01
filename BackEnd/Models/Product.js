@@ -19,8 +19,9 @@ const productSchema=new mongoose.Schema({
     category: {type: String, 
         required: true
     },
-    inStock: {type: Boolean, 
-        required: true,
+    inStock: {
+        type: Boolean, 
+        default: true,
     }
 }, {timestamps: true})
 
