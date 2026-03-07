@@ -171,10 +171,10 @@ export const footerLinks = [
   {
     title: "Follow Us",
     links: [
-      { text: "Instagram", url: "#" },
-      { text: "Twitter", url: "#" },
-      { text: "Facebook", url: "#" },
-      { text: "YouTube", url: "#" },
+      { text: "Instagram", url: "https://www.instagram.com/_yuvrajsinghgaur_?igsh=d2k3bmw5MDUxOWpz" },
+      { text: "Twitter", url: "https://x.com/_yuvraj12gaur_" },
+      { text: "Facebook", url: "https://www.facebook.com/share/188Xi8FSPP/" },
+      { text: "LinkedIn", url: "https://www.linkedin.com/in/gauryuvraj?utm_source=share_via&utm_content=profile&utm_medium=member_android" },
     ],
   },
 ];

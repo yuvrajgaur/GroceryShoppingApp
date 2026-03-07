@@ -19,7 +19,12 @@ const Footer = () => {
                             <ul className="text-sm space-y-1">
                                 {section.links.map((link, i) => (
                                     <li key={i}>
-                                        <a href={link.url} className="hover:underline transition">{link.text}</a>
+                                        <a href={link.url} 
+                                           target={section.title === "Follow Us" ? "_blank" : "_self"} 
+                                           rel={section.title === "Follow Us" ? "noopener noreferrer" : ""} 
+                                           className="hover:underline transition">
+                                            {link.text}
+                                        </a>
                                     </li>
                                 ))}
                             </ul>

@@ -14,6 +14,10 @@ const userSchema=new mongoose.Schema({
         type: String, 
         required:true
     },
+    image:{
+        type:String,
+        default:""
+    },
     cartItems: {
         type: Object, 
         default: {}
