@@ -22,6 +22,7 @@ import AddProduct from './pages/Seller/AddProduct'
 import ProductList from './pages/Seller/ProductList'
 import Orders from './pages/Seller/Orders'
 import Loading from './components/Loading'
+import EditProduct from './pages/Seller/EditProduct'
 
 const App = () => {
 
@@ -44,9 +45,10 @@ const App = () => {
           <Route path='/my-orders' element={<MyOrders/>}/>
           <Route path='/loader' element={<Loading/>}/>
           <Route path='/seller' element={isSeller ? <SellerLayout/>: <SellerLogin/>}>
-           <Route index element={isSeller ? <AddProduct/> : null}/>
-           <Route path='product-list' element={<ProductList/>}/>
-           <Route path='orders' element={<Orders/>}/>
+            <Route index element={isSeller ? <AddProduct/> : null}/>
+            <Route path='product-list' element={<ProductList/>}/>
+            <Route path='orders' element={<Orders/>}/>
+            <Route path='edit/:id' element={<EditProduct/>} />
           </Route>
           <Route path="*" element={<p className="mt-10 text-center text-gray-500">Page not found </p>} />
         </Routes>

@@ -13,11 +13,13 @@ const Loading = () => {
     useEffect(()=>{
         if (!nextUrl) return;
 
-        if(nextUrl){
-            setTimeout(()=>{
-                navigate(`/${nextUrl}`)
-            }, 3000)
-        }
+        navigate(`/${nextUrl}`)
+
+        // if(nextUrl){
+        //     setTimeout(()=>{
+        //         navigate(`/${nextUrl}`)
+        //     }, 3000)
+        // }
     }, [nextUrl, navigate])
 
   return (

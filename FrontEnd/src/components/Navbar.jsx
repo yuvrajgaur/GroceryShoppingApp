@@ -67,7 +67,7 @@ const Navbar = () => {
                             <li onClick={logout} className='p-1.5 pl-3 hover:bg-primary/10 cursor-pointer'>Logout</li>
                         </ul>
                     </div>
-                )
+                ) 
             }
         </div>
         

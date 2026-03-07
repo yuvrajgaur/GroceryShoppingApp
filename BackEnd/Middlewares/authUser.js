@@ -1,6 +1,7 @@
 import jwt from "jsonwebtoken";
 
 const authUser=async(req, res, next)=>{
+    //grocery app userAuth
     const {token}=req.cookies;
 
     if(!token){
@@ -15,8 +16,8 @@ const authUser=async(req, res, next)=>{
 
         if(tokenDecode.id){
             req.user = {
-            id: tokenDecode.id
-        };
+                id: tokenDecode.id
+            };
         }
         else{
             return res.json({
