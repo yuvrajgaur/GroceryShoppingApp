@@ -20,7 +20,7 @@ await connectCloudinary();
 
 
 //Allow multiple origins
-const allowedOrigins=['http://localhost:5173', 'https://www.go-grocery.app/']   //frontend dev server
+const allowedOrigins=['http://localhost:5173', 'https://shopgogrocery.vercel.app']   //frontend dev server
 
 app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
 
