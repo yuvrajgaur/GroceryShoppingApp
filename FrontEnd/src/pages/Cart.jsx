@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import { useAppContext } from '../context/AppContext'
 import { dummyAddress } from '../assets/assets';
 import { assets } from '../assets/assets';
@@ -12,6 +12,7 @@ const Cart = () => {
     const [showAddress, setShowAddress]=useState(false)
     const [selectedAddress, setSelectedAddress]=useState(null)
     const [paymentOption, setPaymentOption]=useState("COD")
+    const addressRef = useRef(null);
     
 
     const getCart=()=>{
@@ -46,6 +47,11 @@ const Cart = () => {
 
     const placeOrder= async ()=>{
         try {
+            
+            if(cartArray.length === 0){
+                return toast.error("Cart is empty");
+            }
+
             if(!selectedAddress){
                 return toast.error("Please select an address")
             }
@@ -56,6 +62,13 @@ const Cart = () => {
             }
 
             if(paymentOption==="COD"){
+
+                const confirmOrder = window.confirm("Are you sure you want to place this order with Cash on Delivery?");
+                //added this so when i place cod it will show confirm popup to avoid accidental order placement by cod since it doesn't require any payment details and also added minimum order amount for online payment to encourage users to use online payment method.
+                if(!confirmOrder){
+                    return; // user clicked cancel
+                }
+
                 const {data}=await axios.post('/api/order/cod', {
                     // userId:user._id,
                     items: cartArray.map(item=>({
@@ -66,7 +79,7 @@ const Cart = () => {
                 })
 
                 if(data.success){
-                    toast.success(data.message)
+                    toast.success(data.message)         
                     setCartItems({})
                     navigate('/my-orders')
                 }else{
@@ -110,6 +123,21 @@ const Cart = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [user])
 
+    //for remove add address dropdown when click outside of it
+    useEffect(() => {
+    const handleClickOutside = (event) => {
+        if (addressRef.current && !addressRef.current.contains(event.target)) {
+            setShowAddress(false);
+        }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => {
+        document.removeEventListener("mousedown", handleClickOutside);
+    };
+}, []);
+
     return products.length > 0 && cartItems ? (
         <div className="flex flex-col md:flex-row mt-16">
             <div className='flex-1 max-w-4xl'>
@@ -120,7 +148,7 @@ const Cart = () => {
                 <div className="grid grid-cols-[2fr_1fr_1fr] text-gray-500 text-base font-medium pb-3">
                     <p className="text-left">Product Details</p>
                     <p className="text-center">Subtotal</p>
-                    <p className="text-center">Action</p>
+                    <p className="text-center">Remove from cart</p>
                 </div>
 
                 {cartArray.map((product, index) => (    
@@ -132,14 +160,37 @@ const Cart = () => {
                             <div>
                                 <p className="hidden md:block font-semibold">{product.name}</p>
                                 <div className="font-normal text-gray-500/70">
+
                                     <p>Weight: <span>{product.weight || "N/A"}</span></p>
-                                    <div className='flex items-center'>
-                                        <p>Quantity:</p>
-                                        <select onChange={e=>updateCartItem(product._id, Number(e.target.value))} value={cartItems[product._id]} className='outline-none'>
-                                            {Array(cartItems[product._id]>9 ? cartItems[product._id] : 9).fill('').map((_, index) => (
-                                                <option key={index} value={index + 1}>{index + 1}</option>
-                                            ))}
-                                        </select>
+
+                                    <div className="flex items-center bg-green-100 rounded-md overflow-hidden w-fit">
+
+                                        <button
+                                            onClick={()=>{
+                                                if(cartItems[product._id] === 1){
+                                                    removeFromCart(product._id)
+                                                }else{
+                                                    updateCartItem(product._id, cartItems[product._id] - 1)
+                                                }
+                                            }}
+                                            className="px-3 py-1 text-primary-dull font-semibold hover:bg-green-200 transition"
+                                        >
+                                        -
+                                        </button>
+
+                                        <span className="px-2 py-1 text-primary-dull font-medium">
+                                            {cartItems[product._id]}
+                                        </span>
+
+                                        <button
+                                            onClick={()=>{
+                                                updateCartItem(product._id, cartItems[product._id] + 1)
+                                            }}
+                                            className="px-3 py-1 text-primary-dull font-semibold hover:bg-green-200 transition"
+                                        >
+                                        +
+                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -164,7 +215,7 @@ const Cart = () => {
 
                 <div className="mb-6">
                     <p className="text-sm font-medium uppercase">Delivery Address</p>
-                    <div className="relative flex justify-between items-start mt-2">
+                    <div ref={addressRef} className="relative flex justify-between items-start mt-2">
                         <p className="text-gray-500">{selectedAddress ? `${selectedAddress.street}, ${selectedAddress.city},${selectedAddress.state}, ${selectedAddress.country}` : "No Address Found"}</p>
                         <button onClick={() => setShowAddress(!showAddress)} className="text-primary hover:underline cursor-pointer">
                             Change
