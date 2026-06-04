@@ -1,5 +1,5 @@
 //App.jsx is the body of app
-//It decides what layout to showwhich, components appear, which page (route) is rendered
+//It decides what layout to show, which components appear, which page (route) is rendered
 
 
 import React from 'react'
@@ -32,17 +32,19 @@ const App = () => {
   return (
     <div className='text-default min-h-screen text-gray-700 bg-white'>
       {isSellerPath ? null :<Navbar/>}  {/* if not in seller path, show navbar */}
-      {showUserLogin?<Login/>:null}
-      <Toaster/>
+      {showUserLogin?<Login/>:null}   {/* if showUserLogin is true, show login modal otherwise null */}
+      <Toaster/>  {/* Toaster component for showing toast notifications, placed near the top of the app so toast notifications can appear globally across all pages */}
+
+       {/* Main content area, add padding on sides if not in seller path */}
 
       <div className={`${isSellerPath ? "" : "px-6 md:px-16 lg:px-24 xl:px-32"}`}>
         <Routes>
-          <Route path='/' element={<Home/>}/>
+          <Route path='/' element={<Home/>}/>      
           <Route path='/products' element={<AllProducts/>}/>
           <Route path='/products/:category' element={<ProductCategories/>}/>
           <Route path='/products/:category/:id' element={<ProductDetails/>}/>
           <Route path='/cart' element={<Cart/>}/>
-          <Route path='/add-address' element={<AddAddress/>}/>
+          <Route path='/add-address' element={<AddAddress/>}/> 
           <Route path='/my-orders' element={<MyOrders/>}/>
           <Route path='/edit-profile' element={<EditProfile/>}/>
           <Route path='/loader' element={<Loading/>}/>

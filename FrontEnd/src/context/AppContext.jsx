@@ -9,8 +9,8 @@ import { dummyProducts } from "../assets/assets";
 import toast from "react-hot-toast";
 import axios from "axios";  //importing axios for HTTP requests, backend communication
 
-axios.defaults.withCredentials=true;
-axios.defaults.baseURL=import.meta.env.VITE_BACKEND_URL;
+axios.defaults.withCredentials=true;  //this line ensures that cookies are included in cross-origin requests, allowing the app to maintain user sessions and authentication state when communicating with the backend API.
+axios.defaults.baseURL=import.meta.env.VITE_BACKEND_URL;  //this line sets the default base URL for all axios requests to the value specified in the environment variable VITE_BACKEND_URL, which should point to the backend server's address. This allows you to easily manage and change the backend URL without modifying individual request code throughout the app.
 
 export const AppContext=createContext();
 
@@ -157,8 +157,8 @@ export const AppContextProvider=({children})=>{
     const value={navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, setCartItems, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartCount, getCartAmount, axios, fetchProducts}
 
     return <AppContext.Provider value={value}>
-        {children}
-    </AppContext.Provider>
+            {children}
+        </AppContext.Provider>
 }
 
 
