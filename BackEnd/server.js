@@ -11,9 +11,10 @@ import cartRouter from './Routes/cartRoute.js';
 import addressRouter from './Routes/addressRoute.js';
 import orderRouter from './Routes/orderRoute.js';
 import { stripeWebhooks } from './Controllers/orderController.js';
+import mailRouter from './Routes/mailRoute.js';
 
-const app=express();
-const port=process.env.PORT || 3000;
+const app=express();   //this line initializes an Express application by calling the express() function. can be named anything, but 'app' is a common convention for the main Express application instance. This instance will be used to define routes, middleware, and start the server.
+const port=process.env.PORT || 3000; //this line sets the port number for the server to listen on.
 
 await connectDB();
 await connectCloudinary();
@@ -22,7 +23,7 @@ await connectCloudinary();
 //Allow multiple origins
 const allowedOrigins=['http://localhost:5173', 'https://shopgogrocery.vercel.app']   //frontend dev server
 
-app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)
+app.post('/stripe', express.raw({type: 'application/json'}), stripeWebhooks)  
 
 //middleware configuration
 app.use(express.json());
@@ -32,13 +33,16 @@ app.use(cors({
     credentials:true
 }))
 
-app.get('/', (req,res) => res.send("API is working"));
-app.use('/api/user', userRouter)
+app.get('/', (req,res) => res.send("API is working"));  //test route to check if server is running
+
+//routes 
+app.use('/api/user', userRouter) 
 app.use('/api/seller', sellerRoute)
 app.use('/api/product', productRouter)
 app.use('/api/cart', cartRouter)
 app.use('/api/address', addressRouter)
 app.use('/api/order', orderRouter)
+app.use('/api/mail', mailRouter)
 
 
 app.listen(port, ()=>{

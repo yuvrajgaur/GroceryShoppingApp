@@ -59,7 +59,7 @@ const MyOrders = () => {
                         <div className='flex flex-col justify-center md:ml-8 mb-4 md:mb-0'>
                             <p>Quantity: {item.quantity || "1"}</p>
                             <p>Status: {order.status}</p>
-                            <p>Date: {new Date(order.createdAt).toLocaleDateString('en-GB')}</p>
+                            <p>Date: {new Date(order.createdAt).toLocaleDateString('en-GB')}</p>   {/*this formats the date in day/month/year format, you can change it according to your preference or locale. */}
                         </div>
 
                         <p className="text-primary text-lg font-medium">

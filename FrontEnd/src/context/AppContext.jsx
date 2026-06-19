@@ -14,7 +14,7 @@ axios.defaults.baseURL=import.meta.env.VITE_BACKEND_URL;  //this line sets the d
 
 export const AppContext=createContext();
 
-export const AppContextProvider=({children})=>{
+export const AppContextProvider=({children})=>{  //children is just a name for the prop that will contain the components wrapped by this provider, it allows us to render those components inside the provider so they can access the context values. When we use <AppContextProvider> in our app, any components placed inside it will be passed as children and can access the context we define here. we can name it anything, but 'children' is a common convention in React for this purpose.
 
     const currency=import.meta.env.VITE_CURRENCY;
 
@@ -52,7 +52,7 @@ export const AppContextProvider=({children})=>{
                 setCartItems({});
             }
         }catch(error){
-            setUser(null)
+                (null)
             setCartItems({});
         }
     }
@@ -155,6 +155,7 @@ export const AppContextProvider=({children})=>{
     }, [user, cartItems]);
 
     const value={navigate, user, setUser, isSeller, setIsSeller, showUserLogin, setShowUserLogin, products, currency, addToCart, updateCartItem, setCartItems, removeFromCart, cartItems, searchQuery, setSearchQuery, getCartCount, getCartAmount, axios, fetchProducts}
+    // value is the object that contains all the state variables and functions that we want to provide to the components consuming this context. we are making these states and functions accessible to any component that uses this context. This allows for centralized state management and easier data flow across the app without prop drilling.
 
     return <AppContext.Provider value={value}>
             {children}

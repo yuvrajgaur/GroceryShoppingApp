@@ -124,9 +124,9 @@ const EditProduct = () => {
 };
 
 
-  // =========================
+  
   // UI
-  // =========================
+
   return (
     <div className="p-6 max-w-xl">
       <h2 className="text-xl font-semibold mb-4 text-primary">
@@ -195,9 +195,7 @@ const EditProduct = () => {
           />
         </div>
 
-        {/* =========================
-            IMAGE GRID UPLOADER
-        ========================= */}
+        {/*IMAGE GRID UPLOADER */}
         <div>
           <p className="text-base font-medium">Product Images</p>
 

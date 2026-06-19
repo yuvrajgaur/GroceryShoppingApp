@@ -24,6 +24,7 @@ import Orders from './pages/Seller/Orders'
 import Loading from './components/Loading'
 import EditProduct from './pages/Seller/EditProduct'
 import EditProfile from './pages/EditProfile'
+import Contact from './pages/Contact'
 
 const App = () => {
 
@@ -41,6 +42,7 @@ const App = () => {
         <Routes>
           <Route path='/' element={<Home/>}/>      
           <Route path='/products' element={<AllProducts/>}/>
+          <Route path='/contact' element={<Contact/>}/>
           <Route path='/products/:category' element={<ProductCategories/>}/>
           <Route path='/products/:category/:id' element={<ProductDetails/>}/>
           <Route path='/cart' element={<Cart/>}/>
