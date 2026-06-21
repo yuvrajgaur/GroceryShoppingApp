@@ -11,6 +11,8 @@
 @theme{
   --color-primary:#4fbf8b;
   --color-primary-dull:#44ae7c;
+   --color-primary-yellow:#5EBCFF;      /* #e0d64d; */
+  --color-dull-yellow:#62A7D9;             /* #d9cd26 */
 }
 
 .no-scrollbar::-webkit-scrollbar{

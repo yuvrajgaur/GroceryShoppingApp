@@ -1,5 +1,5 @@
 import express from 'express'
-import {isAuth, login, logout, register} from '../Controllers/userController.js'
+import {isAuth, login, logout, register, googleLogin} from '../Controllers/userController.js'
 import authUser from '../Middlewares/authUser.js';
 import { updateProfile } from '../Controllers/profileController.js';
 import { upload } from '../configs/multer.js';
@@ -11,6 +11,7 @@ userRouter.post('/login', login)
 userRouter.get('/is-auth', authUser, isAuth)
 userRouter.get('/logout', logout)
 userRouter.put('/edit-profile', authUser, upload.single("image"), updateProfile)
+userRouter.post('/google-login', googleLogin)
 
 
 export default userRouter;

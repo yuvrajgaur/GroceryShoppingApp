@@ -111,6 +111,42 @@ export const login=async(req,res)=>{
     }
 }
 
+//gooleLogin
+export const googleLogin = async (req, res) => {
+    try {
+        const { name, email} = req.body;
+
+        let user = await User.findOne({ email });
+
+        if (!user) {
+            user = await User.create({
+                name,
+                email
+            });
+        }
+
+        const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET);
+
+        res.cookie('token', token, {
+            httpOnly: true,
+            secure: process.env.NODE_ENV === "production",
+            sameSite: process.env.NODE_ENV === "production" ? "none" : "strict",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+
+        res.json({
+            success: true,
+            user
+        });
+
+    } catch (error) {
+        res.json({
+            success: false,
+            message: error.message
+        });
+    }
+}
+
 //check auth: /api/user/is-auth 
 export const isAuth= async (req, res)=>{
     try{

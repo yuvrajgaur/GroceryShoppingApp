@@ -88,11 +88,11 @@ const AddAddress = () => {
                 </div>
 
                  <div className='grid grid-cols-2 gap-4'>
-                    <InputField handleChange={handleChange} address={address} name='zipcode' type="number" placeholder="Zip Code"/>
+                    <InputField handleChange={handleChange} address={address} name='zipcode' type="text" placeholder="Zip Code"/>
                     <InputField handleChange={handleChange} address={address} name='country' type="text" placeholder="Country"/>
                 </div>
 
-                <InputField handleChange={handleChange} address={address} name='phone' type="number" placeholder="Contact Number"/>
+                <InputField handleChange={handleChange} address={address} name='phone' type="tel" placeholder="Contact Number"/>
 
                 <button className='w-full mt-6 bg-primary text-white py-3 hover:bg-primary-dull transition cursor-pointer uppercase'>Save Address</button>
             </form>

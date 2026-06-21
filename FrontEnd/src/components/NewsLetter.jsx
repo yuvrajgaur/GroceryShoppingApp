@@ -16,7 +16,7 @@ const NewsLetter = () => {
 
         try {
             const { data } = await axios.post(
-                '/api/newsletter/subscribe',
+                '/api/mail/subscribe',
                 { email }
             );
 

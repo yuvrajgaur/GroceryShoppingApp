@@ -70,6 +70,11 @@ import quinoa_image from "./quinoa_image.png";
 import brown_rice_image from "./brown_rice_image.png";
 import barley_image from "./barley_image.png";
 import gogrocery from "./gogrocery.jpeg";
+import google_logo from "./google_logo.png"
+import main_bg_banner from "./main_bg_banner.png"
+import main_bg_banner_sm from "./main_bg_banner_sm.png"
+import gogrocery_clear from "./gogrocery-clear.png"
+
 
 export const assets = {
   logo,
@@ -100,6 +105,10 @@ export const assets = {
   bottom_banner_image_sm,
   add_address_image,
   box_icon,
+  google_logo,
+  main_bg_banner,
+  main_bg_banner_sm,
+  gogrocery_clear
 };
 
 export const categories = [
