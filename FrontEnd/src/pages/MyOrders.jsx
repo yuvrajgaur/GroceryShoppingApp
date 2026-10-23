@@ -22,7 +22,6 @@ const MyOrders = () => {
         if(user){
             fetchMyOrders();
         }
-        
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[user])
   return (
